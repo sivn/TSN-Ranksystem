@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+ ranksystem-db:
+   image: mysql:5.7.25 
+   container_name: ncts3_db
+   restart: unless-stopped
+   volumes:
+     - ./data_db:/var/lib/mysql:rw
+   environment:
+     - MYSQL_ROOT_PASSWORD=
+     - MYSQL_DATABASE=
+     - MYSQL_USER=
+     - MYSQL_PASSWORD=
+   networks:
+     - default
+ ranksystem:
+   image: tsn:latest
+   restart: on-failure
+   container_name: ncts3_rank
+   restart:  unless-stopped
+   stop_signal: SIGTERM
+   ports:
+     - 4000:80
+   volumes:
+     - ./data_tsn/tsicons:/var/www/tsicons
+     - ./data_tsn/logs:/opt/logs/
+   depends_on:
+     - ranksystem-db
+   networks:
+     - default
+   environment:
+     - BASE_HREF=/
+     - DB_TYPE=
+     - DB_HOST=
+     - DB_NAME=
+     - DB_USERNAME=
+     - DB_PASSWORD=
