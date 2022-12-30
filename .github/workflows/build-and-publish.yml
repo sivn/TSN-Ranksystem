@@ -30,7 +30,7 @@ jobs:
           context: ./
           tags: |
             sivn/tsn:latest 
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: ${{ github.ref == 'refs/heads/master' }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
