@@ -18,7 +18,7 @@ RUN apt-get update && \
     docker-php-ext-enable zip && \
     rm -rf /var/lib/apt/lists/*
 
-# Allow apache to bind to port 80 with any user
+# Allow apache to bind to port 80 with any user 
 # Use the PHP production settings.
 # Accept X-Forwarded-For as real client ip from a TRUSTED PROXY.
 # Set the "Server" header to production (e.g. to "Apache") and
